@@ -1,0 +1,1374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="tafesystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admins">
+          <Key>
+            <PropertyRef Name="adminId" />
+          </Key>
+          <Property Name="adminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="30" />
+          <Property Name="middlename" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dob" Type="date" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ausers">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="adminId" Type="int" />
+        </EntityType>
+        <EntityType Name="cluster">
+          <Key>
+            <PropertyRef Name="clusterId" />
+          </Key>
+          <Property Name="clusterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clustername" Type="varchar" MaxLength="30" />
+          <Property Name="teacherId" Type="int" />
+        </EntityType>
+        <EntityType Name="clusterlocation">
+          <Key>
+            <PropertyRef Name="clusterlocationId" />
+          </Key>
+          <Property Name="clusterlocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clusterId" Type="int" Nullable="false" />
+          <Property Name="locationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="courseId" />
+          </Key>
+          <Property Name="courseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="coursename" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="mode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fee" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="courseclusterunit">
+          <Key>
+            <PropertyRef Name="courseId" />
+            <PropertyRef Name="clusterId" />
+            <PropertyRef Name="unitId" />
+          </Key>
+          <Property Name="courseId" Type="int" Nullable="false" />
+          <Property Name="clusterId" Type="int" Nullable="false" />
+          <Property Name="unitId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="courselocation">
+          <Key>
+            <PropertyRef Name="locationId" />
+          </Key>
+          <Property Name="locationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="locationname" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="coursesemester">
+          <Key>
+            <PropertyRef Name="semesterId" />
+          </Key>
+          <Property Name="semesterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="semestername" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="coursetimetable">
+          <Key>
+            <PropertyRef Name="coursetimetable" />
+          </Key>
+          <Property Name="coursetimetable" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="coursename" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="clustername" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="teachername" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="room" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="days" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="time" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="courseId" Type="int" />
+          <Property Name="locationId" Type="int" />
+        </EntityType>
+        <EntityType Name="enrollment">
+          <Key>
+            <PropertyRef Name="enrollmentId" />
+          </Key>
+          <Property Name="enrollmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="coursename" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="semestername" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="locationname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="mode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fee" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="result" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="studentId" Type="int" />
+          <Property Name="courseId" Type="int" />
+          <Property Name="locationId" Type="int" />
+        </EntityType>
+        <EntityType Name="fee">
+          <Key>
+            <PropertyRef Name="feeId" />
+          </Key>
+          <Property Name="feeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paidfee" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="studentId" Type="int" />
+        </EntityType>
+        <EntityType Name="Incoursesemester">
+          <Key>
+            <PropertyRef Name="inlocationcourse" />
+          </Key>
+          <Property Name="inlocationcourse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="courseId" Type="int" Nullable="false" />
+          <Property Name="semesterId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inlocationcourse">
+          <Key>
+            <PropertyRef Name="nlocationcourse" />
+          </Key>
+          <Property Name="nlocationcourse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="courseId" Type="int" Nullable="false" />
+          <Property Name="locationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="studentId" />
+          </Key>
+          <Property Name="studentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="30" />
+          <Property Name="middlename" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dob" Type="date" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="susers">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="studentId" Type="int" />
+        </EntityType>
+        <EntityType Name="teacher">
+          <Key>
+            <PropertyRef Name="teacherId" />
+          </Key>
+          <Property Name="teacherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="30" />
+          <Property Name="middlename" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dob" Type="date" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="teachercourse">
+          <Key>
+            <PropertyRef Name="teachercourseId" />
+          </Key>
+          <Property Name="teachercourseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="coursename" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="clustername" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="semestername" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="locationname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="mode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="teacherId" Type="int" />
+          <Property Name="courseId" Type="int" />
+        </EntityType>
+        <EntityType Name="tusers">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="teacherId" Type="int" />
+        </EntityType>
+        <EntityType Name="unit">
+          <Key>
+            <PropertyRef Name="unitId" />
+          </Key>
+          <Property Name="unitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="unitCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="unitTitle" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="essential" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ausers__adminId__0D7A0286">
+          <End Role="admins" Type="Self.admins" Multiplicity="0..1" />
+          <End Role="ausers" Type="Self.ausers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admins">
+              <PropertyRef Name="adminId" />
+            </Principal>
+            <Dependent Role="ausers">
+              <PropertyRef Name="adminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__coursetim__cours__489AC854">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="coursetimetable" Type="Self.coursetimetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="coursetimetable">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__coursetim__locat__498EEC8D">
+          <End Role="courselocation" Type="Self.courselocation" Multiplicity="0..1" />
+          <End Role="coursetimetable" Type="Self.coursetimetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courselocation">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="coursetimetable">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__enrollmen__cours__7E37BEF6">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="enrollment" Type="Self.enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="enrollment">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__enrollmen__locat__7C1A6C5A">
+          <End Role="courselocation" Type="Self.courselocation" Multiplicity="0..1" />
+          <End Role="enrollment" Type="Self.enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courselocation">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="enrollment">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__enrollmen__stude__7D439ABD">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="enrollment" Type="Self.enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="enrollment">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fee__studentId__10566F31">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="fee" Type="Self.fee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="fee">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__susers__studentI__45F365D3">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="susers" Type="Self.susers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="susers">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teacherco__cours__04E4BC85">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="teachercourse" Type="Self.teachercourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="teachercourse">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teacherco__teach__03F0984C">
+          <End Role="teacher" Type="Self.teacher" Multiplicity="0..1" />
+          <End Role="teachercourse" Type="Self.teachercourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teacher">
+              <PropertyRef Name="teacherId" />
+            </Principal>
+            <Dependent Role="teachercourse">
+              <PropertyRef Name="teacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tusers__teacherI__01142BA1">
+          <End Role="teacher" Type="Self.teacher" Multiplicity="0..1" />
+          <End Role="tusers" Type="Self.tusers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teacher">
+              <PropertyRef Name="teacherId" />
+            </Principal>
+            <Dependent Role="tusers">
+              <PropertyRef Name="teacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_clusterlocation_cluster">
+          <End Role="cluster" Type="Self.cluster" Multiplicity="1" />
+          <End Role="clusterlocation" Type="Self.clusterlocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cluster">
+              <PropertyRef Name="clusterId" />
+            </Principal>
+            <Dependent Role="clusterlocation">
+              <PropertyRef Name="clusterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_clusterlocation_location">
+          <End Role="courselocation" Type="Self.courselocation" Multiplicity="1" />
+          <End Role="clusterlocation" Type="Self.clusterlocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courselocation">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="clusterlocation">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseclusterunit_cluster">
+          <End Role="cluster" Type="Self.cluster" Multiplicity="1" />
+          <End Role="courseclusterunit" Type="Self.courseclusterunit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cluster">
+              <PropertyRef Name="clusterId" />
+            </Principal>
+            <Dependent Role="courseclusterunit">
+              <PropertyRef Name="clusterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseclusterunit_course">
+          <End Role="course" Type="Self.course" Multiplicity="1" />
+          <End Role="courseclusterunit" Type="Self.courseclusterunit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="courseclusterunit">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseclusterunit_unit">
+          <End Role="unit" Type="Self.unit" Multiplicity="1" />
+          <End Role="courseclusterunit" Type="Self.courseclusterunit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit">
+              <PropertyRef Name="unitId" />
+            </Principal>
+            <Dependent Role="courseclusterunit">
+              <PropertyRef Name="unitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_coursesemester_course">
+          <End Role="course" Type="Self.course" Multiplicity="1" />
+          <End Role="Incoursesemester" Type="Self.Incoursesemester" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="Incoursesemester">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_coursesemester_semester">
+          <End Role="coursesemester" Type="Self.coursesemester" Multiplicity="1" />
+          <End Role="Incoursesemester" Type="Self.Incoursesemester" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="coursesemester">
+              <PropertyRef Name="semesterId" />
+            </Principal>
+            <Dependent Role="Incoursesemester">
+              <PropertyRef Name="semesterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_locationcourse_course">
+          <End Role="course" Type="Self.course" Multiplicity="1" />
+          <End Role="Inlocationcourse" Type="Self.Inlocationcourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="Inlocationcourse">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_locationcourse_location">
+          <End Role="courselocation" Type="Self.courselocation" Multiplicity="1" />
+          <End Role="Inlocationcourse" Type="Self.Inlocationcourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courselocation">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="Inlocationcourse">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tafesystemModelStoreContainer">
+          <EntitySet Name="admins" EntityType="Self.admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ausers" EntityType="Self.ausers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cluster" EntityType="Self.cluster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clusterlocation" EntityType="Self.clusterlocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="courseclusterunit" EntityType="Self.courseclusterunit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="courselocation" EntityType="Self.courselocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="coursesemester" EntityType="Self.coursesemester" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="coursetimetable" EntityType="Self.coursetimetable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="enrollment" EntityType="Self.enrollment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fee" EntityType="Self.fee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Incoursesemester" EntityType="Self.Incoursesemester" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inlocationcourse" EntityType="Self.Inlocationcourse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="susers" EntityType="Self.susers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teachercourse" EntityType="Self.teachercourse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tusers" EntityType="Self.tusers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="unit" EntityType="Self.unit" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ausers__adminId__0D7A0286" Association="Self.FK__ausers__adminId__0D7A0286">
+            <End Role="admins" EntitySet="admins" />
+            <End Role="ausers" EntitySet="ausers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__coursetim__cours__489AC854" Association="Self.FK__coursetim__cours__489AC854">
+            <End Role="course" EntitySet="course" />
+            <End Role="coursetimetable" EntitySet="coursetimetable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__coursetim__locat__498EEC8D" Association="Self.FK__coursetim__locat__498EEC8D">
+            <End Role="courselocation" EntitySet="courselocation" />
+            <End Role="coursetimetable" EntitySet="coursetimetable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__enrollmen__cours__7E37BEF6" Association="Self.FK__enrollmen__cours__7E37BEF6">
+            <End Role="course" EntitySet="course" />
+            <End Role="enrollment" EntitySet="enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__enrollmen__locat__7C1A6C5A" Association="Self.FK__enrollmen__locat__7C1A6C5A">
+            <End Role="courselocation" EntitySet="courselocation" />
+            <End Role="enrollment" EntitySet="enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__enrollmen__stude__7D439ABD" Association="Self.FK__enrollmen__stude__7D439ABD">
+            <End Role="student" EntitySet="student" />
+            <End Role="enrollment" EntitySet="enrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fee__studentId__10566F31" Association="Self.FK__fee__studentId__10566F31">
+            <End Role="student" EntitySet="student" />
+            <End Role="fee" EntitySet="fee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__susers__studentI__45F365D3" Association="Self.FK__susers__studentI__45F365D3">
+            <End Role="student" EntitySet="student" />
+            <End Role="susers" EntitySet="susers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teacherco__cours__04E4BC85" Association="Self.FK__teacherco__cours__04E4BC85">
+            <End Role="course" EntitySet="course" />
+            <End Role="teachercourse" EntitySet="teachercourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teacherco__teach__03F0984C" Association="Self.FK__teacherco__teach__03F0984C">
+            <End Role="teacher" EntitySet="teacher" />
+            <End Role="teachercourse" EntitySet="teachercourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tusers__teacherI__01142BA1" Association="Self.FK__tusers__teacherI__01142BA1">
+            <End Role="teacher" EntitySet="teacher" />
+            <End Role="tusers" EntitySet="tusers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_clusterlocation_cluster" Association="Self.FK_clusterlocation_cluster">
+            <End Role="cluster" EntitySet="cluster" />
+            <End Role="clusterlocation" EntitySet="clusterlocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_clusterlocation_location" Association="Self.FK_clusterlocation_location">
+            <End Role="courselocation" EntitySet="courselocation" />
+            <End Role="clusterlocation" EntitySet="clusterlocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseclusterunit_cluster" Association="Self.FK_courseclusterunit_cluster">
+            <End Role="cluster" EntitySet="cluster" />
+            <End Role="courseclusterunit" EntitySet="courseclusterunit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseclusterunit_course" Association="Self.FK_courseclusterunit_course">
+            <End Role="course" EntitySet="course" />
+            <End Role="courseclusterunit" EntitySet="courseclusterunit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseclusterunit_unit" Association="Self.FK_courseclusterunit_unit">
+            <End Role="unit" EntitySet="unit" />
+            <End Role="courseclusterunit" EntitySet="courseclusterunit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_coursesemester_course" Association="Self.FK_coursesemester_course">
+            <End Role="course" EntitySet="course" />
+            <End Role="Incoursesemester" EntitySet="Incoursesemester" />
+          </AssociationSet>
+          <AssociationSet Name="FK_coursesemester_semester" Association="Self.FK_coursesemester_semester">
+            <End Role="coursesemester" EntitySet="coursesemester" />
+            <End Role="Incoursesemester" EntitySet="Incoursesemester" />
+          </AssociationSet>
+          <AssociationSet Name="FK_locationcourse_course" Association="Self.FK_locationcourse_course">
+            <End Role="course" EntitySet="course" />
+            <End Role="Inlocationcourse" EntitySet="Inlocationcourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_locationcourse_location" Association="Self.FK_locationcourse_location">
+            <End Role="courselocation" EntitySet="courselocation" />
+            <End Role="Inlocationcourse" EntitySet="Inlocationcourse" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tafesystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="studentId" />
+          </Key>
+          <Property Name="studentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="middlename" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="gender" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="susers" Relationship="tafesystemModel.FK__susers__studentI__45F365D3" FromRole="student" ToRole="suser" />
+          <NavigationProperty Name="fees" Relationship="tafesystemModel.FK__fee__studentId__10566F31" FromRole="student" ToRole="fee" />
+          <NavigationProperty Name="enrollments" Relationship="tafesystemModel.FK__enrollmen__stude__7D439ABD" FromRole="student" ToRole="enrollment" />
+        </EntityType>
+        <EntityContainer Name="tafesystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="students" EntityType="Self.student" />
+          <EntitySet Name="teachers" EntityType="tafesystemModel.teacher" />
+          <EntitySet Name="susers" EntityType="tafesystemModel.suser" />
+          <AssociationSet Name="FK__susers__studentI__45F365D3" Association="tafesystemModel.FK__susers__studentI__45F365D3">
+            <End Role="student" EntitySet="students" />
+            <End Role="suser" EntitySet="susers" />
+          </AssociationSet>
+          <EntitySet Name="courses" EntityType="tafesystemModel.course" />
+          <EntitySet Name="courseclusterunits" EntityType="tafesystemModel.courseclusterunit" />
+          <EntitySet Name="units" EntityType="tafesystemModel.unit" />
+          <AssociationSet Name="FK_courseclusterunit_course" Association="tafesystemModel.FK_courseclusterunit_course">
+            <End Role="course" EntitySet="courses" />
+            <End Role="courseclusterunit" EntitySet="courseclusterunits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseclusterunit_unit" Association="tafesystemModel.FK_courseclusterunit_unit">
+            <End Role="unit" EntitySet="units" />
+            <End Role="courseclusterunit" EntitySet="courseclusterunits" />
+          </AssociationSet>
+          <EntitySet Name="tusers" EntityType="tafesystemModel.tuser" />
+          <AssociationSet Name="FK__tusers__teacherI__01142BA1" Association="tafesystemModel.FK__tusers__teacherI__01142BA1">
+            <End Role="teacher" EntitySet="teachers" />
+            <End Role="tuser" EntitySet="tusers" />
+          </AssociationSet>
+          <EntitySet Name="teachercourses" EntityType="tafesystemModel.teachercourse" />
+          <AssociationSet Name="FK__teacherco__cours__04E4BC85" Association="tafesystemModel.FK__teacherco__cours__04E4BC85">
+            <End Role="course" EntitySet="courses" />
+            <End Role="teachercourse" EntitySet="teachercourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teacherco__teach__03F0984C" Association="tafesystemModel.FK__teacherco__teach__03F0984C">
+            <End Role="teacher" EntitySet="teachers" />
+            <End Role="teachercourse" EntitySet="teachercourses" />
+          </AssociationSet>
+          <EntitySet Name="admins" EntityType="tafesystemModel.admin" />
+          <EntitySet Name="ausers" EntityType="tafesystemModel.auser" />
+          <AssociationSet Name="FK__ausers__adminId__0D7A0286" Association="tafesystemModel.FK__ausers__adminId__0D7A0286">
+            <End Role="admin" EntitySet="admins" />
+            <End Role="auser" EntitySet="ausers" />
+          </AssociationSet>
+          <EntitySet Name="fees" EntityType="tafesystemModel.fee" />
+          <AssociationSet Name="FK__fee__studentId__10566F31" Association="tafesystemModel.FK__fee__studentId__10566F31">
+            <End Role="student" EntitySet="students" />
+            <End Role="fee" EntitySet="fees" />
+          </AssociationSet>
+          <EntitySet Name="coursetimetables" EntityType="tafesystemModel.coursetimetable" />
+          <AssociationSet Name="FK__coursetim__cours__489AC854" Association="tafesystemModel.FK__coursetim__cours__489AC854">
+            <End Role="course" EntitySet="courses" />
+            <End Role="coursetimetable" EntitySet="coursetimetables" />
+          </AssociationSet>
+          <EntitySet Name="courselocations" EntityType="tafesystemModel.courselocation" />
+          <EntitySet Name="Inlocationcourses" EntityType="tafesystemModel.Inlocationcourse" />
+          <AssociationSet Name="FK_locationcourse_course" Association="tafesystemModel.FK_locationcourse_course">
+            <End Role="course" EntitySet="courses" />
+            <End Role="Inlocationcourse" EntitySet="Inlocationcourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__coursetim__locat__498EEC8D" Association="tafesystemModel.FK__coursetim__locat__498EEC8D">
+            <End Role="courselocation" EntitySet="courselocations" />
+            <End Role="coursetimetable" EntitySet="coursetimetables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_locationcourse_location" Association="tafesystemModel.FK_locationcourse_location">
+            <End Role="courselocation" EntitySet="courselocations" />
+            <End Role="Inlocationcourse" EntitySet="Inlocationcourses" />
+          </AssociationSet>
+          <EntitySet Name="coursesemesters" EntityType="tafesystemModel.coursesemester" />
+          <EntitySet Name="Incoursesemesters" EntityType="tafesystemModel.Incoursesemester" />
+          <AssociationSet Name="FK_coursesemester_course" Association="tafesystemModel.FK_coursesemester_course">
+            <End Role="course" EntitySet="courses" />
+            <End Role="Incoursesemester" EntitySet="Incoursesemesters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_coursesemester_semester" Association="tafesystemModel.FK_coursesemester_semester">
+            <End Role="coursesemester" EntitySet="coursesemesters" />
+            <End Role="Incoursesemester" EntitySet="Incoursesemesters" />
+          </AssociationSet>
+          <EntitySet Name="clusters" EntityType="tafesystemModel.cluster" />
+          <EntitySet Name="clusterlocations" EntityType="tafesystemModel.clusterlocation" />
+          <AssociationSet Name="FK_clusterlocation_cluster" Association="tafesystemModel.FK_clusterlocation_cluster">
+            <End Role="cluster" EntitySet="clusters" />
+            <End Role="clusterlocation" EntitySet="clusterlocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseclusterunit_cluster" Association="tafesystemModel.FK_courseclusterunit_cluster">
+            <End Role="cluster" EntitySet="clusters" />
+            <End Role="courseclusterunit" EntitySet="courseclusterunits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_clusterlocation_location" Association="tafesystemModel.FK_clusterlocation_location">
+            <End Role="courselocation" EntitySet="courselocations" />
+            <End Role="clusterlocation" EntitySet="clusterlocations" />
+          </AssociationSet>
+          <EntitySet Name="enrollments" EntityType="tafesystemModel.enrollment" />
+          <AssociationSet Name="FK__enrollmen__cours__7E37BEF6" Association="tafesystemModel.FK__enrollmen__cours__7E37BEF6">
+            <End Role="course" EntitySet="courses" />
+            <End Role="enrollment" EntitySet="enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__enrollmen__locat__7C1A6C5A" Association="tafesystemModel.FK__enrollmen__locat__7C1A6C5A">
+            <End Role="courselocation" EntitySet="courselocations" />
+            <End Role="enrollment" EntitySet="enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__enrollmen__stude__7D439ABD" Association="tafesystemModel.FK__enrollmen__stude__7D439ABD">
+            <End Role="student" EntitySet="students" />
+            <End Role="enrollment" EntitySet="enrollments" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="teacher">
+          <Key>
+            <PropertyRef Name="teacherId" />
+          </Key>
+          <Property Name="teacherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="middlename" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="gender" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tusers" Relationship="tafesystemModel.FK__tusers__teacherI__01142BA1" FromRole="teacher" ToRole="tuser" />
+          <NavigationProperty Name="teachercourses" Relationship="tafesystemModel.FK__teacherco__teach__03F0984C" FromRole="teacher" ToRole="teachercourse" />
+        </EntityType>
+        <EntityType Name="suser">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="studentId" Type="Int32" />
+          <NavigationProperty Name="student" Relationship="tafesystemModel.FK__susers__studentI__45F365D3" FromRole="suser" ToRole="student" />
+        </EntityType>
+        <Association Name="FK__susers__studentI__45F365D3">
+          <End Type="tafesystemModel.student" Role="student" Multiplicity="0..1" />
+          <End Type="tafesystemModel.suser" Role="suser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="suser">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="courseId" />
+          </Key>
+          <Property Name="courseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="coursename" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="mode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fee" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="courseclusterunits" Relationship="tafesystemModel.FK_courseclusterunit_course" FromRole="course" ToRole="courseclusterunit" />
+          <NavigationProperty Name="teachercourses" Relationship="tafesystemModel.FK__teacherco__cours__04E4BC85" FromRole="course" ToRole="teachercourse" />
+          <NavigationProperty Name="coursetimetables" Relationship="tafesystemModel.FK__coursetim__cours__489AC854" FromRole="course" ToRole="coursetimetable" />
+          <NavigationProperty Name="Inlocationcourses" Relationship="tafesystemModel.FK_locationcourse_course" FromRole="course" ToRole="Inlocationcourse" />
+          <NavigationProperty Name="Incoursesemesters" Relationship="tafesystemModel.FK_coursesemester_course" FromRole="course" ToRole="Incoursesemester" />
+          <NavigationProperty Name="enrollments" Relationship="tafesystemModel.FK__enrollmen__cours__7E37BEF6" FromRole="course" ToRole="enrollment" />
+        </EntityType>
+        <EntityType Name="courseclusterunit">
+          <Key>
+            <PropertyRef Name="courseId" />
+            <PropertyRef Name="clusterId" />
+            <PropertyRef Name="unitId" />
+          </Key>
+          <Property Name="courseId" Type="Int32" Nullable="false" />
+          <Property Name="clusterId" Type="Int32" Nullable="false" />
+          <Property Name="unitId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="course" Relationship="tafesystemModel.FK_courseclusterunit_course" FromRole="courseclusterunit" ToRole="course" />
+          <NavigationProperty Name="unit" Relationship="tafesystemModel.FK_courseclusterunit_unit" FromRole="courseclusterunit" ToRole="unit" />
+          <NavigationProperty Name="cluster" Relationship="tafesystemModel.FK_courseclusterunit_cluster" FromRole="courseclusterunit" ToRole="cluster" />
+        </EntityType>
+        <EntityType Name="unit">
+          <Key>
+            <PropertyRef Name="unitId" />
+          </Key>
+          <Property Name="unitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="unitCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="unitTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="essential" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="courseclusterunits" Relationship="tafesystemModel.FK_courseclusterunit_unit" FromRole="unit" ToRole="courseclusterunit" />
+        </EntityType>
+        <Association Name="FK_courseclusterunit_course">
+          <End Type="tafesystemModel.course" Role="course" Multiplicity="1" />
+          <End Type="tafesystemModel.courseclusterunit" Role="courseclusterunit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="courseclusterunit">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseclusterunit_unit">
+          <End Type="tafesystemModel.unit" Role="unit" Multiplicity="1" />
+          <End Type="tafesystemModel.courseclusterunit" Role="courseclusterunit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit">
+              <PropertyRef Name="unitId" />
+            </Principal>
+            <Dependent Role="courseclusterunit">
+              <PropertyRef Name="unitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tuser">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="teacherId" Type="Int32" />
+          <NavigationProperty Name="teacher" Relationship="tafesystemModel.FK__tusers__teacherI__01142BA1" FromRole="tuser" ToRole="teacher" />
+        </EntityType>
+        <Association Name="FK__tusers__teacherI__01142BA1">
+          <End Type="tafesystemModel.teacher" Role="teacher" Multiplicity="0..1" />
+          <End Type="tafesystemModel.tuser" Role="tuser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teacher">
+              <PropertyRef Name="teacherId" />
+            </Principal>
+            <Dependent Role="tuser">
+              <PropertyRef Name="teacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="teachercourse">
+          <Key>
+            <PropertyRef Name="teachercourseId" />
+          </Key>
+          <Property Name="teachercourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="coursename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clustername" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="semestername" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="locationname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="teacherId" Type="Int32" />
+          <Property Name="courseId" Type="Int32" />
+          <NavigationProperty Name="course" Relationship="tafesystemModel.FK__teacherco__cours__04E4BC85" FromRole="teachercourse" ToRole="course" />
+          <NavigationProperty Name="teacher" Relationship="tafesystemModel.FK__teacherco__teach__03F0984C" FromRole="teachercourse" ToRole="teacher" />
+        </EntityType>
+        <Association Name="FK__teacherco__cours__04E4BC85">
+          <End Type="tafesystemModel.course" Role="course" Multiplicity="0..1" />
+          <End Type="tafesystemModel.teachercourse" Role="teachercourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="teachercourse">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teacherco__teach__03F0984C">
+          <End Type="tafesystemModel.teacher" Role="teacher" Multiplicity="0..1" />
+          <End Type="tafesystemModel.teachercourse" Role="teachercourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teacher">
+              <PropertyRef Name="teacherId" />
+            </Principal>
+            <Dependent Role="teachercourse">
+              <PropertyRef Name="teacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="adminId" />
+          </Key>
+          <Property Name="adminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="middlename" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="gender" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ausers" Relationship="tafesystemModel.FK__ausers__adminId__0D7A0286" FromRole="admin" ToRole="auser" />
+        </EntityType>
+        <EntityType Name="auser">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adminId" Type="Int32" />
+          <NavigationProperty Name="admin" Relationship="tafesystemModel.FK__ausers__adminId__0D7A0286" FromRole="auser" ToRole="admin" />
+        </EntityType>
+        <Association Name="FK__ausers__adminId__0D7A0286">
+          <End Type="tafesystemModel.admin" Role="admin" Multiplicity="0..1" />
+          <End Type="tafesystemModel.auser" Role="auser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin">
+              <PropertyRef Name="adminId" />
+            </Principal>
+            <Dependent Role="auser">
+              <PropertyRef Name="adminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="fee">
+          <Key>
+            <PropertyRef Name="feeId" />
+          </Key>
+          <Property Name="feeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paidfee" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="studentId" Type="Int32" />
+          <NavigationProperty Name="student" Relationship="tafesystemModel.FK__fee__studentId__10566F31" FromRole="fee" ToRole="student" />
+        </EntityType>
+        <Association Name="FK__fee__studentId__10566F31">
+          <End Type="tafesystemModel.student" Role="student" Multiplicity="0..1" />
+          <End Type="tafesystemModel.fee" Role="fee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="fee">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="coursetimetable">
+          <Key>
+            <PropertyRef Name="coursetimetable1" />
+          </Key>
+          <Property Name="coursetimetable1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="coursename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clustername" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="teachername" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="room" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="days" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="time" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="courseId" Type="Int32" />
+          <Property Name="locationId" Type="Int32" />
+          <NavigationProperty Name="course" Relationship="tafesystemModel.FK__coursetim__cours__489AC854" FromRole="coursetimetable" ToRole="course" />
+          <NavigationProperty Name="courselocation" Relationship="tafesystemModel.FK__coursetim__locat__498EEC8D" FromRole="coursetimetable" ToRole="courselocation" />
+        </EntityType>
+        <Association Name="FK__coursetim__cours__489AC854">
+          <End Type="tafesystemModel.course" Role="course" Multiplicity="0..1" />
+          <End Type="tafesystemModel.coursetimetable" Role="coursetimetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="coursetimetable">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="courselocation">
+          <Key>
+            <PropertyRef Name="locationId" />
+          </Key>
+          <Property Name="locationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="locationname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="coursetimetables" Relationship="tafesystemModel.FK__coursetim__locat__498EEC8D" FromRole="courselocation" ToRole="coursetimetable" />
+          <NavigationProperty Name="Inlocationcourses" Relationship="tafesystemModel.FK_locationcourse_location" FromRole="courselocation" ToRole="Inlocationcourse" />
+          <NavigationProperty Name="clusterlocations" Relationship="tafesystemModel.FK_clusterlocation_location" FromRole="courselocation" ToRole="clusterlocation" />
+          <NavigationProperty Name="enrollments" Relationship="tafesystemModel.FK__enrollmen__locat__7C1A6C5A" FromRole="courselocation" ToRole="enrollment" />
+        </EntityType>
+        <EntityType Name="Inlocationcourse">
+          <Key>
+            <PropertyRef Name="nlocationcourse" />
+          </Key>
+          <Property Name="nlocationcourse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="courseId" Type="Int32" Nullable="false" />
+          <Property Name="locationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="course" Relationship="tafesystemModel.FK_locationcourse_course" FromRole="Inlocationcourse" ToRole="course" />
+          <NavigationProperty Name="courselocation" Relationship="tafesystemModel.FK_locationcourse_location" FromRole="Inlocationcourse" ToRole="courselocation" />
+        </EntityType>
+        <Association Name="FK_locationcourse_course">
+          <End Type="tafesystemModel.course" Role="course" Multiplicity="1" />
+          <End Type="tafesystemModel.Inlocationcourse" Role="Inlocationcourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="Inlocationcourse">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__coursetim__locat__498EEC8D">
+          <End Type="tafesystemModel.courselocation" Role="courselocation" Multiplicity="0..1" />
+          <End Type="tafesystemModel.coursetimetable" Role="coursetimetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courselocation">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="coursetimetable">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_locationcourse_location">
+          <End Type="tafesystemModel.courselocation" Role="courselocation" Multiplicity="1" />
+          <End Type="tafesystemModel.Inlocationcourse" Role="Inlocationcourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courselocation">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="Inlocationcourse">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="coursesemester">
+          <Key>
+            <PropertyRef Name="semesterId" />
+          </Key>
+          <Property Name="semesterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="semestername" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Incoursesemesters" Relationship="tafesystemModel.FK_coursesemester_semester" FromRole="coursesemester" ToRole="Incoursesemester" />
+        </EntityType>
+        <EntityType Name="Incoursesemester">
+          <Key>
+            <PropertyRef Name="inlocationcourse" />
+          </Key>
+          <Property Name="inlocationcourse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="courseId" Type="Int32" Nullable="false" />
+          <Property Name="semesterId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="course" Relationship="tafesystemModel.FK_coursesemester_course" FromRole="Incoursesemester" ToRole="course" />
+          <NavigationProperty Name="coursesemester" Relationship="tafesystemModel.FK_coursesemester_semester" FromRole="Incoursesemester" ToRole="coursesemester" />
+        </EntityType>
+        <Association Name="FK_coursesemester_course">
+          <End Type="tafesystemModel.course" Role="course" Multiplicity="1" />
+          <End Type="tafesystemModel.Incoursesemester" Role="Incoursesemester" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="Incoursesemester">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_coursesemester_semester">
+          <End Type="tafesystemModel.coursesemester" Role="coursesemester" Multiplicity="1" />
+          <End Type="tafesystemModel.Incoursesemester" Role="Incoursesemester" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="coursesemester">
+              <PropertyRef Name="semesterId" />
+            </Principal>
+            <Dependent Role="Incoursesemester">
+              <PropertyRef Name="semesterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="cluster">
+          <Key>
+            <PropertyRef Name="clusterId" />
+          </Key>
+          <Property Name="clusterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clustername" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="teacherId" Type="Int32" />
+          <NavigationProperty Name="clusterlocations" Relationship="tafesystemModel.FK_clusterlocation_cluster" FromRole="cluster" ToRole="clusterlocation" />
+          <NavigationProperty Name="courseclusterunits" Relationship="tafesystemModel.FK_courseclusterunit_cluster" FromRole="cluster" ToRole="courseclusterunit" />
+        </EntityType>
+        <EntityType Name="clusterlocation">
+          <Key>
+            <PropertyRef Name="clusterlocationId" />
+          </Key>
+          <Property Name="clusterlocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clusterId" Type="Int32" Nullable="false" />
+          <Property Name="locationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cluster" Relationship="tafesystemModel.FK_clusterlocation_cluster" FromRole="clusterlocation" ToRole="cluster" />
+          <NavigationProperty Name="courselocation" Relationship="tafesystemModel.FK_clusterlocation_location" FromRole="clusterlocation" ToRole="courselocation" />
+        </EntityType>
+        <Association Name="FK_clusterlocation_cluster">
+          <End Type="tafesystemModel.cluster" Role="cluster" Multiplicity="1" />
+          <End Type="tafesystemModel.clusterlocation" Role="clusterlocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cluster">
+              <PropertyRef Name="clusterId" />
+            </Principal>
+            <Dependent Role="clusterlocation">
+              <PropertyRef Name="clusterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseclusterunit_cluster">
+          <End Type="tafesystemModel.cluster" Role="cluster" Multiplicity="1" />
+          <End Type="tafesystemModel.courseclusterunit" Role="courseclusterunit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cluster">
+              <PropertyRef Name="clusterId" />
+            </Principal>
+            <Dependent Role="courseclusterunit">
+              <PropertyRef Name="clusterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_clusterlocation_location">
+          <End Type="tafesystemModel.courselocation" Role="courselocation" Multiplicity="1" />
+          <End Type="tafesystemModel.clusterlocation" Role="clusterlocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courselocation">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="clusterlocation">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="enrollment">
+          <Key>
+            <PropertyRef Name="enrollmentId" />
+          </Key>
+          <Property Name="enrollmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="coursename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="semestername" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="locationname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fee" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="result" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="studentId" Type="Int32" />
+          <Property Name="courseId" Type="Int32" />
+          <Property Name="locationId" Type="Int32" />
+          <NavigationProperty Name="course" Relationship="tafesystemModel.FK__enrollmen__cours__7E37BEF6" FromRole="enrollment" ToRole="course" />
+          <NavigationProperty Name="courselocation" Relationship="tafesystemModel.FK__enrollmen__locat__7C1A6C5A" FromRole="enrollment" ToRole="courselocation" />
+          <NavigationProperty Name="student" Relationship="tafesystemModel.FK__enrollmen__stude__7D439ABD" FromRole="enrollment" ToRole="student" />
+        </EntityType>
+        <Association Name="FK__enrollmen__cours__7E37BEF6">
+          <End Type="tafesystemModel.course" Role="course" Multiplicity="0..1" />
+          <End Type="tafesystemModel.enrollment" Role="enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="enrollment">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__enrollmen__locat__7C1A6C5A">
+          <End Type="tafesystemModel.courselocation" Role="courselocation" Multiplicity="0..1" />
+          <End Type="tafesystemModel.enrollment" Role="enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courselocation">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="enrollment">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__enrollmen__stude__7D439ABD">
+          <End Type="tafesystemModel.student" Role="student" Multiplicity="0..1" />
+          <End Type="tafesystemModel.enrollment" Role="enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="enrollment">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tafesystemModelStoreContainer" CdmEntityContainer="tafesystemEntities">
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="tafesystemModel.student">
+              <MappingFragment StoreEntitySet="student">
+                <ScalarProperty Name="studentId" ColumnName="studentId" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teachers">
+            <EntityTypeMapping TypeName="tafesystemModel.teacher">
+              <MappingFragment StoreEntitySet="teacher">
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="teacherId" ColumnName="teacherId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="susers">
+            <EntityTypeMapping TypeName="tafesystemModel.suser">
+              <MappingFragment StoreEntitySet="susers">
+                <ScalarProperty Name="studentId" ColumnName="studentId" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courses">
+            <EntityTypeMapping TypeName="tafesystemModel.course">
+              <MappingFragment StoreEntitySet="course">
+                <ScalarProperty Name="fee" ColumnName="fee" />
+                <ScalarProperty Name="mode" ColumnName="mode" />
+                <ScalarProperty Name="coursename" ColumnName="coursename" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courseclusterunits">
+            <EntityTypeMapping TypeName="tafesystemModel.courseclusterunit">
+              <MappingFragment StoreEntitySet="courseclusterunit">
+                <ScalarProperty Name="unitId" ColumnName="unitId" />
+                <ScalarProperty Name="clusterId" ColumnName="clusterId" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="units">
+            <EntityTypeMapping TypeName="tafesystemModel.unit">
+              <MappingFragment StoreEntitySet="unit">
+                <ScalarProperty Name="essential" ColumnName="essential" />
+                <ScalarProperty Name="unitTitle" ColumnName="unitTitle" />
+                <ScalarProperty Name="unitCode" ColumnName="unitCode" />
+                <ScalarProperty Name="unitId" ColumnName="unitId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tusers">
+            <EntityTypeMapping TypeName="tafesystemModel.tuser">
+              <MappingFragment StoreEntitySet="tusers">
+                <ScalarProperty Name="teacherId" ColumnName="teacherId" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teachercourses">
+            <EntityTypeMapping TypeName="tafesystemModel.teachercourse">
+              <MappingFragment StoreEntitySet="teachercourse">
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+                <ScalarProperty Name="teacherId" ColumnName="teacherId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="mode" ColumnName="mode" />
+                <ScalarProperty Name="locationname" ColumnName="locationname" />
+                <ScalarProperty Name="semestername" ColumnName="semestername" />
+                <ScalarProperty Name="clustername" ColumnName="clustername" />
+                <ScalarProperty Name="coursename" ColumnName="coursename" />
+                <ScalarProperty Name="teachercourseId" ColumnName="teachercourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="tafesystemModel.admin">
+              <MappingFragment StoreEntitySet="admins">
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="adminId" ColumnName="adminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ausers">
+            <EntityTypeMapping TypeName="tafesystemModel.auser">
+              <MappingFragment StoreEntitySet="ausers">
+                <ScalarProperty Name="adminId" ColumnName="adminId" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fees">
+            <EntityTypeMapping TypeName="tafesystemModel.fee">
+              <MappingFragment StoreEntitySet="fee">
+                <ScalarProperty Name="studentId" ColumnName="studentId" />
+                <ScalarProperty Name="paidfee" ColumnName="paidfee" />
+                <ScalarProperty Name="feeId" ColumnName="feeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="coursetimetables">
+            <EntityTypeMapping TypeName="tafesystemModel.coursetimetable">
+              <MappingFragment StoreEntitySet="coursetimetable">
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="days" ColumnName="days" />
+                <ScalarProperty Name="room" ColumnName="room" />
+                <ScalarProperty Name="teachername" ColumnName="teachername" />
+                <ScalarProperty Name="clustername" ColumnName="clustername" />
+                <ScalarProperty Name="coursename" ColumnName="coursename" />
+                <ScalarProperty Name="coursetimetable1" ColumnName="coursetimetable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courselocations">
+            <EntityTypeMapping TypeName="tafesystemModel.courselocation">
+              <MappingFragment StoreEntitySet="courselocation">
+                <ScalarProperty Name="locationname" ColumnName="locationname" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inlocationcourses">
+            <EntityTypeMapping TypeName="tafesystemModel.Inlocationcourse">
+              <MappingFragment StoreEntitySet="Inlocationcourse">
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+                <ScalarProperty Name="nlocationcourse" ColumnName="nlocationcourse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="coursesemesters">
+            <EntityTypeMapping TypeName="tafesystemModel.coursesemester">
+              <MappingFragment StoreEntitySet="coursesemester">
+                <ScalarProperty Name="semestername" ColumnName="semestername" />
+                <ScalarProperty Name="semesterId" ColumnName="semesterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Incoursesemesters">
+            <EntityTypeMapping TypeName="tafesystemModel.Incoursesemester">
+              <MappingFragment StoreEntitySet="Incoursesemester">
+                <ScalarProperty Name="semesterId" ColumnName="semesterId" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+                <ScalarProperty Name="inlocationcourse" ColumnName="inlocationcourse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clusters">
+            <EntityTypeMapping TypeName="tafesystemModel.cluster">
+              <MappingFragment StoreEntitySet="cluster">
+                <ScalarProperty Name="teacherId" ColumnName="teacherId" />
+                <ScalarProperty Name="clustername" ColumnName="clustername" />
+                <ScalarProperty Name="clusterId" ColumnName="clusterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clusterlocations">
+            <EntityTypeMapping TypeName="tafesystemModel.clusterlocation">
+              <MappingFragment StoreEntitySet="clusterlocation">
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="clusterId" ColumnName="clusterId" />
+                <ScalarProperty Name="clusterlocationId" ColumnName="clusterlocationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="enrollments">
+            <EntityTypeMapping TypeName="tafesystemModel.enrollment">
+              <MappingFragment StoreEntitySet="enrollment">
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+                <ScalarProperty Name="studentId" ColumnName="studentId" />
+                <ScalarProperty Name="result" ColumnName="result" />
+                <ScalarProperty Name="fee" ColumnName="fee" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="mode" ColumnName="mode" />
+                <ScalarProperty Name="locationname" ColumnName="locationname" />
+                <ScalarProperty Name="semestername" ColumnName="semestername" />
+                <ScalarProperty Name="coursename" ColumnName="coursename" />
+                <ScalarProperty Name="enrollmentId" ColumnName="enrollmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

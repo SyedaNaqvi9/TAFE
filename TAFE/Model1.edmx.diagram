@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f0fa38f7a2f14c87b073e09dc0a14af4" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="tafesystemModel.student" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tafesystemModel.teacher" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="tafesystemModel.suser" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="tafesystemModel.FK__susers__studentI__45F365D3" />
+        <EntityTypeShape EntityType="tafesystemModel.course" Width="1.5" PointX="11.125" PointY="8.5" />
+        <EntityTypeShape EntityType="tafesystemModel.courseclusterunit" Width="1.5" PointX="6.125" PointY="8" />
+        <EntityTypeShape EntityType="tafesystemModel.unit" Width="1.5" PointX="4.25" PointY="10.875" />
+        <AssociationConnector Association="tafesystemModel.FK_courseclusterunit_course" />
+        <AssociationConnector Association="tafesystemModel.FK_courseclusterunit_unit" />
+        <EntityTypeShape EntityType="tafesystemModel.tuser" Width="1.5" PointX="3.5" PointY="7.625" />
+        <AssociationConnector Association="tafesystemModel.FK__tusers__teacherI__01142BA1" />
+        <EntityTypeShape EntityType="tafesystemModel.teachercourse" Width="1.5" PointX="9.375" PointY="7.125" />
+        <AssociationConnector Association="tafesystemModel.FK__teacherco__cours__04E4BC85" />
+        <AssociationConnector Association="tafesystemModel.FK__teacherco__teach__03F0984C" />
+        <EntityTypeShape EntityType="tafesystemModel.admin" Width="1.5" PointX="5.375" PointY="1" />
+        <EntityTypeShape EntityType="tafesystemModel.auser" Width="1.5" PointX="7.625" PointY="1.375" />
+        <AssociationConnector Association="tafesystemModel.FK__ausers__adminId__0D7A0286" />
+        <EntityTypeShape EntityType="tafesystemModel.fee" Width="1.5" PointX="3" PointY="4.5" />
+        <AssociationConnector Association="tafesystemModel.FK__fee__studentId__10566F31" />
+        <EntityTypeShape EntityType="tafesystemModel.coursetimetable" Width="1.5" PointX="17.25" PointY="8.125" />
+        <AssociationConnector Association="tafesystemModel.FK__coursetim__cours__489AC854" />
+        <EntityTypeShape EntityType="tafesystemModel.courselocation" Width="1.5" PointX="8" PointY="4.375" />
+        <EntityTypeShape EntityType="tafesystemModel.Inlocationcourse" Width="1.5" PointX="12.75" PointY="7" />
+        <AssociationConnector Association="tafesystemModel.FK_locationcourse_course" />
+        <AssociationConnector Association="tafesystemModel.FK__coursetim__locat__498EEC8D" />
+        <AssociationConnector Association="tafesystemModel.FK_locationcourse_location" />
+        <EntityTypeShape EntityType="tafesystemModel.coursesemester" Width="1.5" PointX="10" PointY="11.75" />
+        <EntityTypeShape EntityType="tafesystemModel.Incoursesemester" Width="1.5" PointX="14.125" PointY="10" />
+        <AssociationConnector Association="tafesystemModel.FK_coursesemester_course" />
+        <AssociationConnector Association="tafesystemModel.FK_coursesemester_semester" />
+        <EntityTypeShape EntityType="tafesystemModel.cluster" Width="1.5" PointX="15.375" PointY="7.5" />
+        <EntityTypeShape EntityType="tafesystemModel.clusterlocation" Width="1.5" PointX="10.625" PointY="3.25" />
+        <AssociationConnector Association="tafesystemModel.FK_clusterlocation_cluster" />
+        <AssociationConnector Association="tafesystemModel.FK_courseclusterunit_cluster" />
+        <AssociationConnector Association="tafesystemModel.FK_clusterlocation_location" />
+        <EntityTypeShape EntityType="tafesystemModel.enrollment" Width="1.5" PointX="13.875" PointY="2.25" />
+        <AssociationConnector Association="tafesystemModel.FK__enrollmen__cours__7E37BEF6" />
+        <AssociationConnector Association="tafesystemModel.FK__enrollmen__locat__7C1A6C5A" />
+        <AssociationConnector Association="tafesystemModel.FK__enrollmen__stude__7D439ABD" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
